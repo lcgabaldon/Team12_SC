@@ -1,20 +1,27 @@
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Wedding {
-    private String couple;         // Names of the couple getting married
-    private String weddingDate;    // Date of the wedding
-    private String location;       // Location of the wedding
-    private Registry registry;     // Registry object associated with this wedding
+    private String couple;
+    private String weddingDate;
+    private String location;
+    private Registry registry;
+    private HashSet<Integer> attendees;  // Store attendee user IDs
+    private Queue<Integer> waitlist;     // Store waitlisted user IDs
+    private final int maxCapacity;       // Max number of attendees allowed
 
-    // Constructor for the Wedding class
-    public Wedding(String couple, String weddingDate, String location) {
+    public Wedding(String couple, String weddingDate, String location, int maxCapacity) {
         this.couple = couple;
         this.weddingDate = weddingDate;
         this.location = location;
-        this.registry = new Registry(couple, weddingDate); // Create a new registry for the couple
+        this.registry = new Registry(couple, weddingDate);
+        this.attendees = new HashSet<>();
+        this.waitlist = new LinkedList<>();
+        this.maxCapacity = maxCapacity;
     }
 
-    // Getters for Wedding attributes
+    // Getters for Wedding properties
     public String getCouple() {
         return couple;
     }
@@ -27,27 +34,39 @@ public class Wedding {
         return location;
     }
 
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public HashSet<Integer> getAttendees() {
+        return attendees;
+    }
+
+    public Queue<Integer> getWaitlist() {
+        return waitlist;
+    }
+
     public Registry getRegistry() {
         return registry;
     }
 
-    // Displays wedding details along with the registry items
+    public int getAttendeeCount() {
+        return attendees.size();
+    }
+
+    public int getWaitlistSize() {
+        return waitlist.size();
+    }
+
+    // Displays the wedding details
     public void displayWeddingDetails() {
         System.out.println("Wedding Details:");
         System.out.println("Couple: " + couple);
         System.out.println("Date: " + weddingDate);
         System.out.println("Location: " + location);
+        System.out.println("Attendees: " + attendees.size() + "/" + maxCapacity);
+        System.out.println("Waitlist: " + waitlist.size());
         System.out.println("Registry Items:");
         registry.displayRegistry(couple);
-    }
-
-    // Adds an item to the wedding registry
-    public void addRegistryItem(String itemName, String description, double price, int itemNum, int requestedAmt, int amtNeeded, boolean purchased) {
-        registry.addItem(itemName, description, price, itemNum, requestedAmt, amtNeeded, purchased);
-    }
-
-    // Purchases an item from the registry
-    public boolean purchaseRegistryItem(String itemName) {
-        return registry.purchaseItem(itemName);
     }
 }
