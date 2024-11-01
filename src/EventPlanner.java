@@ -7,8 +7,8 @@ public class EventPlanner {
     private List<Event> events;
 
     public EventPlanner() {
-        this.users = new ArrayList<>();
-        this.events = new ArrayList<>();
+        this.users = new ArrayList<>(); //we need users to be able to create events, create user class
+        this.events = new ArrayList<>(); //we need events to be able to RSVP users, create event class
     }
 
     // Method to create a new user
