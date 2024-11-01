@@ -1,3 +1,4 @@
+package com;
 public class main {
     public static void main(String[] args) {
         Registry registry = new Registry("John & Jane Doe", "December 12, 2024");

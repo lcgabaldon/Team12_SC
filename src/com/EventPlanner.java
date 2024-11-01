@@ -1,3 +1,5 @@
+package com;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +43,7 @@ public class EventPlanner {
         System.out.println("Event not found: " + eventId);
         return null;
     }
-    
+
     public List<User> getAttendeesForEvent(String eventId) {
         List<User> attendees = new ArrayList<>();
         for (User user : users) {
