@@ -1,10 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
+
+import org.w3c.dom.events.Event;
+
 import java.time.LocalDateTime;
 
 public class EventPlanner {
     private List<User> users;
-    private List<Event> events;
+    private List<Event> events; 
 
     public EventPlanner() {
         this.users = new ArrayList<>(); //we need users to be able to create events, create user class
@@ -37,6 +40,16 @@ public class EventPlanner {
         }
         System.out.println("Event not found: " + eventId);
         return null;
+    }
+    
+    public List<User> getAttendeesForEvent(String eventId) {
+        List<User> attendees = new ArrayList<>();
+        for (User user : users) {
+            if (user.getEventsAttended().contains(eventId)) {
+                attendees.add(user);
+            }
+        }
+        return attendees;
     }
 
     // Method to RSVP a user to an event
