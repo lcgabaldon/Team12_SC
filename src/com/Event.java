@@ -1,17 +1,8 @@
-// Class Name: EventPage (SOFIA)
-
-// Responsibilities:
-// Display a list of all upcoming public events.
-// Provide details about events (location, time, attendee count, etc).
-
-// Collaborators:
-// EventManager (to fetch event data).
-// Contracts:
-// showPublicEvents(): Displays a list of all public events.
-// showEventDetails(eventId): Displays detailed information about a specific event.
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Event{
     private int eventId;
@@ -21,8 +12,8 @@ public class Event{
     private String dateTime;
     private String createdBy;
     private int maxAttendees; 
-    private int attendees;
-    private Queue<Integer> waitlist;
+    private List<com.user> attendees;
+    // private Queue<Integer> waitlist;
     private Boolean isPublic;
 
     // private String couple; //Should we include the couple in the event information?
@@ -35,8 +26,8 @@ public class Event{
         this.dateTime = dateTime;
         this.createdBy = createdBy;
         this.maxAttendees = maxAttendees;
-        this.attendees = attendees;
-        this.waitlist= new LinkedList<>();
+        this.attendees = new ArrayList<>();
+        // this.waitlist= new LinkedList<>();
         this.isPublic = isPublic;
     }
 
@@ -68,13 +59,13 @@ public class Event{
         return maxAttendees;
     }
 
-    public getAttendees(){
+    public List<User> getAttendees(){
         return attendees;
     }
 
-    public Queue<Integer> getWaitlist(){
-        return waitlist;
-    }
+    // public Queue<Integer> getWaitlist(){
+    //     return waitlist;
+    // }
 
     public Boolean getIsPublic(){
         return isPublic;
@@ -90,25 +81,49 @@ public class Event{
         System.out.println("Created by: " + createdBy);
         System.out.println("Max attendees: " + maxAttendees);
         System.out.println("Current attendees: " + attendees);
-        System.out.println("Waitlist: " + waitlist.size());
+        // System.out.println("Waitlist: " + waitlist.size());
         System.out.println("Public: " + isPublic);
 
     }
 
-    // public void add_attendee(user, attendees){
+    // Method to add a user to the attendees list
+    // Adds a user to the attendees list if space is available. 
+    public void add_attendee(User user){
+        if (attendees.size() < maxAttendees){
+            attendees.add(user);
+        }
+        System.out.println("Max attendee count reached")
 
+
+    }
+
+    // Removes a user from the attendees or the waitlist. 
+    public void remove_attendee(User user){
+        if (attendees.contains(user)){
+            attendees.remove(user);
+            System.out.println("User removed from list of attendees.");
+        }
+        if (waitlist.contains(user)){
+            waitlist.remove(user);
+            System.out.println("User removed from waitlist");
+        }
+    }
+
+    // Sends notifications to attendees about event updates. 
+    public void notify_users(){
+        for (user attendee : attendees){
+            attendee.notify();
+        }
+
+    }
+
+    // Adds a user to the waitlist if the event is full. 
+    // public void move_to_waitlist(User user){
+    //     if (attendees.size() == maxAttendees){
+    //         waitlist.add(user);
+    //         System.out.println("User added to the waitlist.");
+    //     }
 
     // }
-
-//     add_attendee(user): Adds a user to the attendees list if space is available. 
-
-// 	remove_attendee(user): Removes a user from the attendees or the waitlist. 
-
-// 	notify_users(): Sends notifications to attendees about event updates. 
-
-// 	move_to_waitlist(user): Adds a user to the waitlist if the event is full. 
-
-
-
 
 }
