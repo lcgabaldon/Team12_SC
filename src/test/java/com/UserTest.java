@@ -10,9 +10,9 @@ class UserTest {
     @BeforeEach
     void setUp() {
         // Initialize a User object before each test
-        user = new User(1, "John", "Michael", "Doe", "john.doe@example.com");
-        user.setEventsCreated("Wedding Ceremony");
-        user.setEventsAttended("Engagement Party");
+        user = new User(1, "Joey", "Adams", "Caproni", "john.doe@example.com");
+        user.setEventsCreated("Joey and Girlie");
+        user.setEventsAttended("Bachelors Party");
     }
 
     @Test
@@ -42,10 +42,10 @@ class UserTest {
     void testSettersAndGetters() {
         // Test setting and getting values
         user.setUserID(2);
-        user.setFirstName("Jane");
-        user.setMiddleName("Anne");
-        user.setLastName("Smith");
-        user.setEmailAddress("jane.smith@example.com");
+        user.setFirstName("Joey");
+        user.setMiddleName("Adams");
+        user.setLastName("Caproni");
+        user.setEmailAddress("joeycaproni420@gmail.com");
         user.setEventsCreated("Joey and Girlie");
         user.setEventsAttended("Bachelor Party");
 
