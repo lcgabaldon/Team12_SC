@@ -1,6 +1,8 @@
 package com;
 import java.util.UUID;
-import java.util.ArrayList;
+import java.net.SocketPermission;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Invite class responsible for handling the invite system. This module sends real-time 
@@ -8,10 +10,11 @@ import java.util.ArrayList;
  * THATS ALL IT DOES. WE DON'T MANAGE THE GUEST LIST THATS @RSVPMANAGER job. WE JUST SEND THE INVITE.
  */
 public class Invite {
-    private user guest;
-    private String eventID;
+    private User guest;
+    private String email;
+    private int eventID;
     private String inviteID;
-    private EventPlanner events;   // From Event class, should eventID come from event class? event.getEventID
+    private Event event;   // From Event class, should eventID come from event class? event.getEventID
     private String invitedUserID; // Does this mean every user gets an ID so we don't go by name. Do we randomize it?
     private inviteStatus status;
 
@@ -20,18 +23,22 @@ public class Invite {
         PENDING, CONFIRMED, DECLINED
     } 
 
-    public Invite(user guest, String eventID, String inviteID, EventPlanner event, String invitedUserID, inviteStatus status) {
-        this.guest = guest;
-        this.eventID = UUID.randomUUID().toString().substring(0, 8); // EventPlanner.getEventId(); EventPlanner should have a getEventID class
+    public Invite(Event event, User guest, User email, int eventID, String inviteID, String invitedUserID, inviteStatus status) {
+        this.event = new Event();
+        this.guest = new User();
+        this.email = guest.getEmailAddress();
+        // this.eventID = UUID.randomUUID().toString().substring(0, 8);
+        this.eventID = event.getEventId();
         this.inviteID = setInviteID();
-        this.events = event;
         this.invitedUserID = setInvitedUserID();
         this.status = inviteStatus.PENDING;
     }
 
-    public Invite(user guest, String eventID) {
+    public Invite(String eventID, User guest, User email) {
+        this.eventID = event.getEventId();
+        this.email = guest.getEmailAddress();
         this.guest = guest;
-        this.eventID = UUID.randomUUID().toString().substring(0, 8);
+        // this.eventID = UUID.randomUUID().toString().substring(0, 8);
     }
 
     public boolean checkStatus(String stat) {
@@ -60,8 +67,8 @@ public class Invite {
         return inviteID;
     }
 
-    public String getEventID() {
-        return eventID;
+    public int getEventId() {
+        return event.getEventId();
     }
 
     public String getInvitedUserID() {
@@ -72,9 +79,10 @@ public class Invite {
         return status;
     }
 
-    public boolean sendInvite(String eventID, String invitedUserID) {
-        EventPlanner event = getEventID(eventID);
-        Invite newInvite = new Invite(guest, eventID, status.PENDING)
+    public boolean sendInvite(int eventID, String invitedUserID) {
+        Event e = event.getEventId(eventID);
+        
+        Invite newInvite = new Invite(eventID, invitedUserID);
         
     }
 
@@ -92,11 +100,16 @@ public class Invite {
 
     }
 
-    // Sample usage
+    // For testing purposes
     public static void main(String[] args) {
+        Event event = new Event();
 
-        // we need an email attr to send it to the user
-        Invite newInvite = new Invite();
+        HashMap<Integer, List<String>> invitedUser = new HashMap<>();
+
+        // we need an email attribute to send it to the user
+        int eventID = event.getEventId();
+        sendInvite(eventID, "Jane Doe", "janedoe@email.com");
+        // Invite newInvite = new Invite(eventID, "Jane Doe", "janedoe@email.com");
         
     }
 }

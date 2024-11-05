@@ -1,6 +1,6 @@
-package com;
+package src.main.java.com;
 
-public class user {
+public class User{
     // Variables:
     private int userID;
     private String firstName;
@@ -11,12 +11,15 @@ public class user {
     private String eventsAttended;
 
     // Constructor
-    public user(int userID, String firstName, String middleName, String lastName, String emailAddress) {
+    public User(int userID, String firstName, String middleName, String lastName, String emailAddress) {
         this.userID = userID;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
+    }
+
+    public User() {
     }
 
     // Getters and Setters:
