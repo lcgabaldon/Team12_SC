@@ -10,9 +10,9 @@ class UserTest {
     @BeforeEach
     void setUp() {
         // Initialize a User object before each test
-        user = new User(1, "Joey", "Adams", "Caproni", "john.doe@example.com");
+        user = new User(69, "Joey", "Adams", "Caproni", "joeycaproni420@gmail.com");
         user.setEventsCreated("Joey and Girlie");
-        user.setEventsAttended("Bachelors Party");
+        user.setEventsAttended("Bachelor Party");
     }
 
     @Test
@@ -28,20 +28,20 @@ class UserTest {
     @Test
     void testFullNameWithMiddleName() {
         // Verify full name construction when middle name is provided
-        assertEquals("John Michael Doe", user.getFullName());
+        assertEquals("Joey Adams Caproni", user.getFullName());
     }
 
     @Test
     void testFullNameWithoutMiddleName() {
         // Set middle name to null and verify full name construction
         user.setMiddleName(null);
-        assertEquals("John Doe", user.getFullName());
+        assertEquals("Joey Caproni", user.getFullName());
     }
 
     @Test
     void testSettersAndGetters() {
         // Test setting and getting values
-        user.setUserID(2);
+        user.setUserID(69);
         user.setFirstName("Joey");
         user.setMiddleName("Adams");
         user.setLastName("Caproni");
