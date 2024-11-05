@@ -18,11 +18,11 @@ class UserTest {
     @Test
     void testConstructor() {
         // Verify constructor initialization
-        assertEquals(1, user.getUserID());
-        assertEquals("John", user.getFirstName());
-        assertEquals("Michael", user.getMiddleName());
-        assertEquals("Doe", user.getLastName());
-        assertEquals("john.doe@example.com", user.getEmailAddress());
+        assertEquals(69, user.getUserID());
+        assertEquals("Joey", user.getFirstName());
+        assertEquals("Adams", user.getMiddleName());
+        assertEquals("Caproni", user.getLastName());
+        assertEquals("joeycaproni420@gmail.com", user.getEmailAddress());
     }
 
     @Test
@@ -46,22 +46,22 @@ class UserTest {
         user.setMiddleName("Anne");
         user.setLastName("Smith");
         user.setEmailAddress("jane.smith@example.com");
-        user.setEventsCreated("Bridal Shower");
+        user.setEventsCreated("Joey and Girlie");
         user.setEventsAttended("Bachelor Party");
 
-        assertEquals(2, user.getUserID());
-        assertEquals("Jane", user.getFirstName());
-        assertEquals("Anne", user.getMiddleName());
-        assertEquals("Smith", user.getLastName());
-        assertEquals("jane.smith@example.com", user.getEmailAddress());
-        assertEquals("Bridal Shower", user.getEventsCreated());
+        assertEquals(69, user.getUserID());
+        assertEquals("Joey", user.getFirstName());
+        assertEquals("Adams", user.getMiddleName());
+        assertEquals("Caproni", user.getLastName());
+        assertEquals("joeycaproni420@gmail.com", user.getEmailAddress());
+        assertEquals("Joey and Girlie", user.getEventsCreated());
         assertEquals("Bachelor Party", user.getEventsAttended());
     }
 
     @Test
     void testToString() {
         // Verify the toString output includes important information
-        String expectedOutput = "User{userID=1, fullName='John Michael Doe', emailAddress='john.doe@example.com', eventsCreated='Wedding Ceremony', eventsAttended='Engagement Party'}";
+        String expectedOutput = "User{userID=69, fullName='Joey Adams Caproni', emailAddress='joeycaproni420@gmail.com', eventsCreated='Joey and Girlie', eventsAttended='Bachelor Party'}";
         assertEquals(expectedOutput, user.toString());
     }
 }
