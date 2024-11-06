@@ -1,22 +1,22 @@
 package com;
-import java.util.LinkedList;
-import java.util.Queue;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Event {
-    private int eventId;
+    private String eventId;
     private String title;
     private String description;
     private String location;
-    private String dateTime;
-    private String createdBy;
+    private LocalDateTime dateTime;
+    private User createdBy;
     private int maxAttendees;
-    private List<User> attendees;
-    private Queue<User> waitlist;
-    private Boolean isPublic;
+    private List<User> attendees = new ArrayList<>();
+    private List<User> waitlist = new ArrayList<>();
 
-    public Event(int eventId, String title, String description, String location, String dateTime, String createdBy, int maxAttendees, Boolean isPublic) {
+    // Constructor
+    public Event(String eventId, String title, String description, String location, LocalDateTime dateTime, User createdBy, int maxAttendees) {
         this.eventId = eventId;
         this.title = title;
         this.description = description;
@@ -24,17 +24,10 @@ public class Event {
         this.dateTime = dateTime;
         this.createdBy = createdBy;
         this.maxAttendees = maxAttendees;
-        this.attendees = new ArrayList<>();
-        this.waitlist = new LinkedList<>();
-        this.isPublic = isPublic;
     }
 
-    public Event() {
-        this.attendees = new ArrayList<>();
-        this.waitlist = new LinkedList<>();
-    }
-
-    public int getEventId() {
+    // Getters
+    public String getEventId() {
         return eventId;
     }
 
@@ -50,75 +43,37 @@ public class Event {
         return location;
     }
 
-    public String getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public String getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public int getMaxAttendees() {
-        return maxAttendees;
+    // Method to add an attendee if there's room
+    public boolean addAttendee(User user) {
+        if (attendees.size() < maxAttendees) {
+            attendees.add(user);
+            return true;
+        }
+        return false;
     }
 
-    public List<User> getAttendees() {
-        return attendees;
+    // Method to add a user to the waitlist
+    public void moveToWaitlist(User user) {
+        waitlist.add(user);
     }
 
-    public Queue<User> getWaitlist() {
+    // Get the list of users on the waitlist
+    public List<User> getWaitlist() {
         return waitlist;
     }
 
-    public Boolean getIsPublic() {
-        return isPublic;
-    }
-
-    public void displayEventDetails() {
-        System.out.println("Event Details:");
-        System.out.println("Event ID: " + eventId);
-        System.out.println("Title: " + title);
-        System.out.println("Description: " + description);
-        System.out.println("Location: " + location);
-        System.out.println("Date and Time: " + dateTime);
-        System.out.println("Created by: " + createdBy);
-        System.out.println("Max attendees: " + maxAttendees);
-        System.out.println("Current attendees: " + attendees);
-        System.out.println("Waitlist: " + waitlist.size());
-        System.out.println("Public: " + isPublic);
-    }
-
-    public void addAttendee(User user) {
-        if (attendees.size() < maxAttendees) {
-            attendees.add(user);
-            System.out.println("User added to attendees list.");
-        } else {
-            moveToWaitlist(user);
-        }
-    }
-
-    public void removeAttendee(User user) {
-        if (attendees.contains(user)) {
-            attendees.remove(user);
-            System.out.println("User removed from list of attendees.");
-            if (!waitlist.isEmpty()) {
-                attendees.add(waitlist.poll());
-                System.out.println("User from waitlist added to attendees.");
-            }
-        } else if (waitlist.contains(user)) {
-            waitlist.remove(user);
-            System.out.println("User removed from waitlist.");
-        }
-    }
-
+    // Notify attendees (sample implementation)
     public void notifyUsers() {
-        for (User attendee : attendees) {
-            attendee.notify(); // Ensure User class has a notify method
+        for (User user : attendees) {
+            System.out.println("Notification sent to: " + user.getFullName());
         }
-    }
-
-    public void moveToWaitlist(User user) {
-        waitlist.add(user);
-        System.out.println("User added to the waitlist.");
     }
 }

@@ -1,10 +1,22 @@
 package com;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         User userCreation = new User(69, "Joey", "", "Caproni", "joeycaproni420@gmail.com");
-        userCreation.setEventsCreated("Joey and Girlie");
-        userCreation.setEventsAttended("Bachelor Party");
+
+        // Create lists for events created and attended
+        List<String> eventsCreated = new ArrayList<>();
+        eventsCreated.add("Joey and Girlie");
+
+        List<String> eventsAttended = new ArrayList<>();
+        eventsAttended.add("Bachelor Party");
+
+        // Set the events created and attended
+        userCreation.setEventsCreated(eventsCreated);
+        userCreation.setEventsAttended(eventsAttended);
 
         // Display user's ID:
         System.out.println("User ID: " + userCreation.getUserID());

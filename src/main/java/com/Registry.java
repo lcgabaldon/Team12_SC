@@ -1,4 +1,5 @@
 package com;
+
 import java.util.ArrayList;
 
 public class Registry {
@@ -20,6 +21,10 @@ public class Registry {
         return wedDate;
     }
 
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
     public void addItem(String itemName, String description, double price, int itemNum, int requestedAmt, int amtNeeded, boolean purchased) {
         items.add(new Item(itemName, description, price, itemNum, requestedAmt, amtNeeded, purchased));
     }
@@ -27,27 +32,28 @@ public class Registry {
     /**
      * Displays the contents of the registry list for the corresponding couple
      */
-    public void displayRegistry(String couple, ArrayList<Item> items) {
-        for (Item itemN : items) { 
-            System.out.println(itemN); 
+    public void displayRegistry() {
+        System.out.println("Registry for " + couple + ":");
+        for (Item item : items) { 
+            System.out.println(item);
         }
     }
 
     /**
      * Purchases the item from the registry and marks the item as purchased
      */
-    public boolean purchaseItem(String itemName, ArrayList<Item> items) {
+    public boolean purchaseItem(String itemName) {
         for (Item item : items) {
-            if (item.getAmtNeeded() <= 0) {
-                System.out.println("This item has already been purchased");
-            } else if (item.getAmtNeeded() > 0) {
-                // Assuming there's a setter method for purchased status
-                item.setPurchasedStatus(true); // Corrected line
-                return true;
+            if (item.getItemName().equalsIgnoreCase(itemName)) {
+                if (item.getAmtNeeded() <= 0) {
+                    System.out.println("This item has already been purchased");
+                } else {
+                    item.setPurchasedStatus(true);
+                    return true;
+                }
             }
         }
+        System.out.println("Item not found in registry.");
         return false;
     }
-
-    
 }

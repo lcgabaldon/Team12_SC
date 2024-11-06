@@ -1,4 +1,6 @@
 package com;
+import java.time.LocalDateTime;
+
 import java.util.UUID;
 
 public class Invite {
@@ -11,35 +13,22 @@ public class Invite {
         PENDING, CONFIRMED, DECLINED
     }
 
-    public Invite(Event event, User guest, String email, int eventID, String inviteID, String invitedUserID, inviteStatus status) {
+    // Simplified Constructor
+    public Invite(Event event, String invitedUserID, inviteStatus status) {
         this.event = event;
-        this.inviteID = inviteID;
+        this.inviteID = UUID.randomUUID().toString().substring(0, 8); // Generate unique invite ID
         this.invitedUserID = invitedUserID;
         this.status = status;
     }
 
+    // Method to check status
     public boolean checkStatus(String stat) {
         return status.toString().equalsIgnoreCase(stat);
     }
 
-    public String setInviteID() {
-        return UUID.randomUUID().toString().substring(0, 8);
-    }
-
-    public String setInvitedUserID() {
-        return UUID.randomUUID().toString().substring(0, 10);
-    }
-
-    public void setStatus(inviteStatus status) {
-        this.status = status;
-    }
-
+    // Getters and Setters
     public String getInviteID() {
         return inviteID;
-    }
-
-    public int getEventId() {
-        return event.getEventId(); // Ensure getEventId is defined in Event class
     }
 
     public String getInvitedUserID() {
@@ -50,13 +39,29 @@ public class Invite {
         return status;
     }
 
-    public boolean sendInvite(int eventID, String invitedUserID) {
-        return true; // Return true or false based on send status
+    public void setStatus(inviteStatus status) {
+        this.status = status;
     }
 
+    // Method to retrieve the event ID associated with this invite
+    public String getEventId() {
+        return event.getEventId(); // Ensure getEventId is defined in Event and returns String
+    }
+
+    // Method to simulate sending an invite
+    public boolean sendInvite() {
+        System.out.println("Invite sent to user ID: " + invitedUserID + " for event ID: " + getEventId());
+        return true; // Simulated return value
+    }
+
+    // Main method for testing
     public static void main(String[] args) {
-        Event event = new Event();
-        Invite invite = new Invite(event, new User(), "janedoe@email.com", 123, "invite123", "user456", inviteStatus.PENDING);
-        invite.sendInvite(invite.getEventId(), invite.getInvitedUserID());
+        // Ensure Event and User constructors are defined to match these calls
+        Event event = new Event("E123", "Wedding Celebration", "A grand wedding event", "Central Park", LocalDateTime.of(2024, 12, 15, 15, 30), new User(), 100);
+        Invite invite = new Invite(event, "user456", inviteStatus.PENDING);
+        
+        invite.sendInvite();
+        System.out.println("Invite ID: " + invite.getInviteID());
+        System.out.println("Invite Status: " + invite.getInviteStatus());
     }
 }

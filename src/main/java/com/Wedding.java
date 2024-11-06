@@ -1,4 +1,5 @@
 package com;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -68,6 +69,6 @@ public class Wedding {
         System.out.println("Attendees: " + attendees.size() + "/" + maxCapacity);
         System.out.println("Waitlist: " + waitlist.size());
         System.out.println("Registry Items:");
-        registry.displayRegistry(couple);
+        registry.displayRegistry(); // Updated to call without arguments
     }
 }

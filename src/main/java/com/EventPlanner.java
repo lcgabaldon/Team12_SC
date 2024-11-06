@@ -2,24 +2,21 @@ package com;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.w3c.dom.events.Event;
-
 import java.time.LocalDateTime;
 
 public class EventPlanner {
     private List<User> users;
-    private List<Event> events; 
+    private List<Event> events;
 
     public EventPlanner() {
-        this.users = new ArrayList<>(); //we need users to be able to create events, create user class
-        this.events = new ArrayList<>(); //we need events to be able to RSVP users, create event class
+        this.users = new ArrayList<>();
+        this.events = new ArrayList<>();
     }
 
     // Method to create a new user
     public void createUser(String name, String email) {
         String userId = "U" + (users.size() + 1); // Example unique ID generation logic
-        User newUser = new User(userId, name, email);
+        User newUser = new User(userId, name, email); // Adjusted to match the new User constructor
         users.add(newUser);
         System.out.println("User created: " + name);
     }
@@ -58,10 +55,10 @@ public class EventPlanner {
     public void rsvpToEvent(User user, Event event) {
         if (event.addAttendee(user)) {
             user.addAttendedEvent(event.getEventId());
-            System.out.println("RSVP successful for: " + user.getName());
+            System.out.println("RSVP successful for: " + user.getFullName());
         } else {
             event.moveToWaitlist(user);
-            System.out.println("Event full. User added to waitlist: " + user.getName());
+            System.out.println("Event full. User added to waitlist: " + user.getFullName());
         }
     }
 
@@ -83,7 +80,7 @@ public class EventPlanner {
         }
     }
 
-    // Main method for testing (optional)
+    // Main method for testing
     public static void main(String[] args) {
         EventPlanner planner = new EventPlanner();
         planner.createUser("John Doe", "john.doe@example.com");

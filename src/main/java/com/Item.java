@@ -1,4 +1,5 @@
 package com;
+
 public class Item {
     private String itemName;
     private String description;
@@ -48,5 +49,10 @@ public class Item {
 
     public void purchase() {
         purchased = true;
+    }
+
+    // New method to set purchased status directly
+    public void setPurchasedStatus(boolean purchased) {
+        this.purchased = purchased;
     }
 }
