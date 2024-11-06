@@ -2,5 +2,5 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
     ],
-    "some.other.setting": "value"
-}
+    "java.project.sourcePaths": ["src/main/java", "src/test/java"]
+  }

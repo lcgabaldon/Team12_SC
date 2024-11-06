@@ -1,11 +1,11 @@
 package com;
 
-public class main {
-    public static void main(String[] args){
+public class Main {
+    public static void main(String[] args) {
         User userCreation = new User(69, "Joey", "", "Caproni", "joeycaproni420@gmail.com");
         userCreation.setEventsCreated("Joey and Girlie");
         userCreation.setEventsAttended("Bachelor Party");
-    
+
         // Display user's ID:
         System.out.println("User ID: " + userCreation.getUserID());
 

@@ -1,16 +1,9 @@
 package com;
 import java.util.UUID;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 
 public class Invite {
-    private User guest;
-    private String email;
-    private int eventID;
-    private String inviteID;
     private Event event;
+    private String inviteID;
     private String invitedUserID;
     private inviteStatus status;
 
@@ -20,9 +13,6 @@ public class Invite {
 
     public Invite(Event event, User guest, String email, int eventID, String inviteID, String invitedUserID, inviteStatus status) {
         this.event = event;
-        this.guest = guest;
-        this.email = email;
-        this.eventID = eventID;
         this.inviteID = inviteID;
         this.invitedUserID = invitedUserID;
         this.status = status;
@@ -61,8 +51,6 @@ public class Invite {
     }
 
     public boolean sendInvite(int eventID, String invitedUserID) {
-        // Assuming Event has a method that allows getting Event by ID
-        // Additional logic here if required
         return true; // Return true or false based on send status
     }
 
