@@ -1,8 +1,8 @@
-
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.ArrayList;
 import java.util.List;
+import src.main.java.com.User; 
 
 public class Event{
     private int eventId;
@@ -12,7 +12,7 @@ public class Event{
     private String dateTime;
     private String createdBy;
     private int maxAttendees; 
-    private List<com.user> attendees;
+    private LinkedList<Integer> attendees;
     // private Queue<Integer> waitlist;
     private Boolean isPublic;
 
@@ -26,7 +26,7 @@ public class Event{
         this.dateTime = dateTime;
         this.createdBy = createdBy;
         this.maxAttendees = maxAttendees;
-        this.attendees = new ArrayList<>();
+        this.attendees = new LinkedList<>();
         // this.waitlist= new LinkedList<>();
         this.isPublic = isPublic;
     }
@@ -34,41 +34,84 @@ public class Event{
     public int getEventId(){
         return eventId;
     }
+    
+    public void setEventId(int eventId){
+        this.eventId = eventId;
+    }
 
     public String getTitle(){
         return title;
     }
 
-    public String getDescription(){
+    public void setEventTitle(String Title){
+        this.title = Title;
+    }
+
+
+    public String getEventDescription(){
         return description;
     }
 
+    public void setEventDescription(String eventDescription){
+        this.description = eventDescription;
+    }
+
+
     public String getLocation(){
         return location;
+    }
+
+    public void setEventLocation(String location){
+        this.location = location;
     }
 
     public String getDateTime(){
         return dateTime;
     }
 
+    public void setEventDateTime(String eventDate){
+        this.dateTime = eventDate;
+    }
+
     public String getCreatedBy(){
         return createdBy;
+    }
+
+    public void setCreatedBy(String eventCreator){
+        this.createdBy = eventCreator;
+
     }
 
     public int getMaxAttendees(){
         return maxAttendees;
     }
 
-    public List<User> getAttendees(){
+    public void setMaxAttendees(int maxAttendees){
+        this.maxAttendees = maxAttendees;
+    }
+
+    public LinkedList<Integer> getAttendees(){
         return attendees;
+    }
+    
+    public void setEventAttendees(LinkedList<Integer> eventAttendees){
+        this.attendees = eventAttendees;
     }
 
     // public Queue<Integer> getWaitlist(){
     //     return waitlist;
     // }
 
+    // public void setEventWaitlist(LinkedList<Integer> eventWaitlist){
+    //     this.waitlist = eventWaitlist;
+    // }
+
     public Boolean getIsPublic(){
         return isPublic;
+    }
+
+    public void setIsPublic(Boolean eventIsPublic){
+        this.isPublic = eventIsPublic;
     }
 
     public void displayEventDetails(){
@@ -103,10 +146,10 @@ public class Event{
             attendees.remove(user);
             System.out.println("User removed from list of attendees.");
         }
-        if (waitlist.contains(user)){
-            waitlist.remove(user);
-            System.out.println("User removed from waitlist");
-        }
+        // if (waitlist.contains(user)){
+        //     waitlist.remove(user);
+        //     System.out.println("User removed from waitlist");
+        // }
     }
 
     // Sends notifications to attendees about event updates. 
