@@ -1,4 +1,4 @@
-package src.main.java.com;
+package com;
 
 public class User{
     // Variables:
@@ -17,6 +17,9 @@ public class User{
         this.middleName = middleName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
+    }
+
+    public User() {
     }
 
     // Getters and Setters:

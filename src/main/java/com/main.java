@@ -1,4 +1,4 @@
-package src.main.java.com;
+package com;
 
 public class main {
     public static void main(String[] args){
