@@ -1,24 +1,23 @@
 package com;
 import java.util.UUID;
-import java.net.SocketPermission;
+
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * Invite class responsible for handling the invite system. This module sends real-time 
  * updates to users, including RSVP confirmations (rsvp) and invitation to events.
- * THATS ALL IT DOES. WE DON'T MANAGE THE GUEST LIST THATS @RSVPMANAGER job. WE JUST SEND THE INVITE.
  */
 public class Invite {
     private User guest;
     private String email;
     private int eventID;
     private String inviteID;
-    private Event event;   // From Event class, should eventID come from event class? event.getEventID
-    private String invitedUserID; // Does this mean every user gets an ID so we don't go by name. Do we randomize it?
+    private Event event;
+    private String invitedUserID;
     private inviteStatus status;
 
-    // We will be using enumerated values as these valued will remain constant throughout the entire program
+    // We will be using enumerated values as these values will remain constant throughout the entire program
     public enum inviteStatus {
         PENDING, CONFIRMED, DECLINED
     } 
@@ -34,11 +33,14 @@ public class Invite {
         this.status = inviteStatus.PENDING;
     }
 
-    public Invite(String eventID, User guest, User email) {
+    public Invite(int eventID, User guest, User email) {
         this.eventID = event.getEventId();
-        this.email = guest.getEmailAddress();
         this.guest = guest;
+        this.email = guest.getEmailAddress();
         // this.eventID = UUID.randomUUID().toString().substring(0, 8);
+    }
+
+    public Invite() {
     }
 
     public boolean checkStatus(String stat) {
@@ -56,8 +58,8 @@ public class Invite {
         return UUID.randomUUID().toString().substring(0, 10);
     }
 
-    public void setStatus(inviteStatus status) {
-        this.status = status;
+    public inviteStatus setStatus(inviteStatus status) {
+        return this.status = status;
     }
 
     /*
@@ -79,37 +81,42 @@ public class Invite {
         return status;
     }
 
-    public boolean sendInvite(int eventID, String invitedUserID) {
-        Event e = event.getEventId(eventID);
-        
-        Invite newInvite = new Invite(eventID, invitedUserID);
-        
+    // Should we send and record the response in this same method?
+    public inviteStatus sendInvite(int eventID, String invitedUserID) {
+        status = inviteStatus.PENDING;
+        return status;
     }
 
-    public void inviteResponse() {
-
-        if(getInviteStatus().equalsIgnoreCase("CONFIRMED")) {
-            ArrayList<String> confirmed = new ArrayList<String>();
-            confirmed.add(invitedUserID);
-
+    public Invite inviteResponse(boolean response) {
+        if(response == true) {
+            status = setStatus(inviteStatus.CONFIRMED);  
+            // add the guest to the list of attendees
+        } else if(response == false) {
+            status = setStatus(inviteStatus.DECLINED);
         }
-        // if user selects confirm
-        // accept = true;
-        // add invitedUserID to rsvp manager list
-        // else, accepts = false;
-
+        return this;
     }
+
+
+    
 
     // For testing purposes
     public static void main(String[] args) {
-        Event event = new Event();
 
+        // We are mapping an eventID with confirmed attendees (this should be in the rsvp class)
         HashMap<Integer, List<String>> invitedUser = new HashMap<>();
+        HashMap<String, String> nameIDPair = new HashMap<>(); // Hash map to assign name with userID
 
-        // we need an email attribute to send it to the user
-        int eventID = event.getEventId();
-        sendInvite(eventID, "Jane Doe", "janedoe@email.com");
-        // Invite newInvite = new Invite(eventID, "Jane Doe", "janedoe@email.com");
+        Invite newInvite = new Invite();
+        Event event = new Event(); // creating a new event instance
+        User guest = new User();
+
+        int eventID = event.getEventId(); // assigning the instance of a unique ID that was generated in the Event class
+        String name = guest.getFullName(); // get the full name for the user being invited to the wedding
+        String invitedUID = UUID.randomUUID().toString().substring(0, 10); // generate a userID for that user
+        nameIDPair.put(name, invitedUID); // adding to the list to store the paired values
+        String email = guest.getEmailAddress();
         
+        newInvite.sendInvite(eventID, invitedUID);        
     }
 }
