@@ -1,6 +1,9 @@
 {
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+    "java.project.sourcePaths": [
+        "Team12_SC/eventplanner/src/main/java/wedding/eventplanner",
+        "eventplanner"
     ],
-    "java.project.sourcePaths": ["src/main/java", "src/test/java"]
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.project.referencedLibraries": [],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
